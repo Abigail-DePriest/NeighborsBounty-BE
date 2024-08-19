@@ -1,0 +1,24 @@
+[
+  {
+      "model": "neighborsbountyapi.inventory",
+      "pk": 1,
+      "fields": {
+          "foodType": "potatoes",
+          "quantity": 20,
+          "pickupDate": "2024-08-16",
+          "pickupLocation": "Richland Farmer's Market",
+          "event": 1
+      }
+  },
+  {
+    "model": "neighborsbountyapi.inventory",
+    "pk": 2,
+    "fields": {
+        "foodType": "Peppers",
+        "quantity": 10,
+        "pickupDate": "2024-08-16",
+        "pickupLocation": "Richland Farmer's Market",
+        "event": 2
+    }
+}
+]

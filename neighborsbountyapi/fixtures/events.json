@@ -1,0 +1,32 @@
+[
+  {
+      "model": "neighborsbountyapi.event",
+      "pk": 1,
+      "fields": {
+          "eventDate": "2024-09-10",
+          "eventType": "gleaning",
+          "location": "567 Straight to Heaven, God's house",
+          "eventTime": "11:00"
+      }
+  },
+  {
+    "model": "neighborsbountyapi.event",
+    "pk": 2,
+    "fields": {
+        "eventDate": "2024-10-10",
+        "eventType": "cooking",
+        "location": "123 cooking street, Abby's house",
+        "eventTime": "15:00"
+    }
+},
+{
+  "model": "neighborsbountyapi.event",
+  "pk": 3,
+  "fields": {
+      "eventDate": "2024-11-11",
+      "eventType": "distribution",
+      "location": "West Side Encampment",
+      "eventTime": "19:00"
+  }
+}
+]

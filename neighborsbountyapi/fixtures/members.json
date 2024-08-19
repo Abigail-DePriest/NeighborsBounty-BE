@@ -1,0 +1,10 @@
+[
+  {
+      "model": "neighborsbountyapi.member",
+      "pk": 1,
+      "fields": {
+          "uid": 1,
+          "name": "Abby"
+      }
+  }
+]
