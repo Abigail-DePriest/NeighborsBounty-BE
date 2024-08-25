@@ -15,9 +15,24 @@ class InventoryView(ViewSet):
         inventories = Inventory.objects.all()
         serializer = InventorySerializer(inventories, many=True)
         return Response(serializer.data)
-
-
-class EventSerializer(serializers.ModelSerializer):
+    
+          
+    def create(self, request):
+        
+        event_id = request.data['event']
+        event = Event.objects.get(pk=event_id)
+        
+        inventory = Inventory.objects.create(
+            foodType=request.data['foodType'],
+            quantity=request.data['quantity'],
+            pickupDate=request.data['pickupDate'],
+            pickupLocation=request.data['pickupDate'],
+            event=event
+        )
+        serializer = InventorySerializer(inventory)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+class InventorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = '__all__'  # Or specify the fields you need
