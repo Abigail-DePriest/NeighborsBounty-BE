@@ -4,7 +4,8 @@
       "pk": 1,
       "fields": {
           "member_id": 1,
-          "event_id": 1
+          "event_id": 1,
+          "role_id": 1
       }
   }
 ]

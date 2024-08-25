@@ -1,0 +1,9 @@
+[
+  {
+  "model": "neighborsbountyapi.role",
+  "pk": 1,
+  "fields": {
+      "roleName": "Chef"
+  }
+}
+]

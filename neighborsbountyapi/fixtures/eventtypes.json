@@ -1,0 +1,23 @@
+[
+  {
+      "model": "neighborsbountyapi.eventtype",
+      "pk": 1,
+      "fields": {
+          "eventTypeName": "Gleaning"
+      }
+  },
+  {
+    "model": "neighborsbountyapi.eventtype",
+    "pk": 2,
+    "fields": {
+        "eventTypeName": "Cooking"
+    }
+},
+{
+  "model": "neighborsbountyapi.eventtype",
+  "pk": 3,
+  "fields": {
+      "eventTypeName": "Distribution"
+  }
+}
+]
