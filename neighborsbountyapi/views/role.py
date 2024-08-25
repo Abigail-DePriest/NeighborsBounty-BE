@@ -16,6 +16,17 @@ class RoleView(ViewSet):
         roles = Role.objects.all()
         serializer = RoleSerializer(roles, many=True)
         return Response(serializer.data)
+    
+    def create(self, request):
+        
+        #eventtype_id= EventType.objects.get(pk=eventtype_id)
+        
+        role = Role.objects.create(
+            roleName=request.data['roleName']
+        )
+        
+        serializer = RoleSerializer(role)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
       
       
 class RoleSerializer(serializers.ModelSerializer):

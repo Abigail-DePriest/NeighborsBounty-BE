@@ -16,6 +16,18 @@ class MemberView(ViewSet):
         members = Member.objects.all()
         serializer = MemberSerializer(members, many=True)
         return Response(serializer.data)
+    
+    def create(self, request):
+       
+        
+        member = Member.objects.create(
+            name=request.data['name']
+        )
+        
+        serializer = MemberSerializer(member)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+      
+    
       
       
 class MemberSerializer(serializers.ModelSerializer):
