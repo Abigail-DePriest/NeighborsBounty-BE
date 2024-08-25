@@ -1,13 +1,13 @@
 from django.db import models
+from .eventtype import EventType
+
 
 
 class Event(models.Model):
-    EVENT_TYPE_CHOICES = [
-      ('gleaning', 'Gleaning'),
-      ('cooking', 'Cooking'),
-      ('distribution', 'Distribution')
-    ]
-    eventDate = models.DateField(blank=True)
-    eventType = models.CharField(max_length = 55, choices=EVENT_TYPE_CHOICES, default= "gleaning")
+    eventDate = models.DateField()
+    eventType = models.ForeignKey(EventType, on_delete=models.CASCADE)
     location = models.CharField(max_length = 100)
-    eventTime = models.TimeField(blank=True)
+    eventTime = models.TimeField()
+    
+    def __str__(self):
+        return f"{self.eventType} on {self.eventDate} at {self.location}"

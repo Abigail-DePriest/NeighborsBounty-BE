@@ -4,7 +4,7 @@
       "pk": 1,
       "fields": {
           "eventDate": "2024-09-10",
-          "eventType": "gleaning",
+          "eventType": 1,
           "location": "567 Straight to Heaven, God's house",
           "eventTime": "11:00"
       }
@@ -14,7 +14,7 @@
     "pk": 2,
     "fields": {
         "eventDate": "2024-10-10",
-        "eventType": "cooking",
+        "eventType": 2,
         "location": "123 cooking street, Abby's house",
         "eventTime": "15:00"
     }
@@ -24,7 +24,7 @@
   "pk": 3,
   "fields": {
       "eventDate": "2024-11-11",
-      "eventType": "distribution",
+      "eventType": 3,
       "location": "West Side Encampment",
       "eventTime": "19:00"
   }
