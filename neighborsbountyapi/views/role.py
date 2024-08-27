@@ -28,6 +28,20 @@ class RoleView(ViewSet):
         serializer = RoleSerializer(role)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
       
+    def update(self, request, pk):
+     
+        role = Role.objects.get(pk=pk)
+        role.roleName = request.data["roleName"]
+       
+        role.save()
+        serializer = RoleSerializer(role)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def destroy(self, request, pk):
+        role = Role.objects.get(pk=pk)
+        role.delete()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+      
       
 class RoleSerializer(serializers.ModelSerializer):
     class Meta:

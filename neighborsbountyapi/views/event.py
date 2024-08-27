@@ -28,6 +28,25 @@ class EventView(ViewSet):
         )
         serializer = EventSerializer(event)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    def update(self, request, pk=None):
+
+        eventType_id = request.data['eventType']
+        eventType = EventType.objects.get(pk=eventType_id)
+        event = Event.objects.get(pk=pk)
+        event.eventDate = request.data['eventDate']
+        event.location = request.data['location']
+        event.eventTime = request.data['eventTime']
+        event.eventType = eventType
+        event.save()
+
+        serializer = EventSerializer(event)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def destroy(self, request, pk):
+        event = Event.objects.get(pk=pk)
+        event.delete()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
           
           
 class EventSerializer(serializers.ModelSerializer):

@@ -26,7 +26,20 @@ class EventTypeView(ViewSet):
         
         serializer = EventTypeSerializer(eventtype)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-          
+    
+    def update(self, request, pk=None):
+        
+        eventtype = EventType.objects.get(pk=pk)
+        eventtype.eventTypeName = request.data['eventTypeName']
+        
+        eventtype.save()
+
+        serializer = EventTypeSerializer(eventtype)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    def destroy(self, request, pk):
+        eventtype = EventType.objects.get(pk=pk)
+        eventtype.delete()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
           
 class EventTypeSerializer(serializers.ModelSerializer):
     class Meta:

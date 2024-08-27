@@ -32,6 +32,26 @@ class InventoryView(ViewSet):
         serializer = InventorySerializer(inventory)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
+    def update(self, request, pk):
+
+        inventory = Inventory.objects.get(pk=pk)
+        inventory.foodType = request.data["foodType"]
+        inventory.quantity = request.data["quantity"]
+        inventory.pickupDate = request.data["pickupDate"]
+        inventory.pickupLocation = request.data["pickupLocation"]
+        event_id = request.data["event"]
+        event = Event.objects.get(pk=event_id)
+        inventory.event = event
+       
+        inventory.save()
+        serializer=InventorySerializer(inventory)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def destroy(self, request, pk):
+        inventory = Inventory.objects.get(pk=pk)
+        inventory.delete()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+    
 class InventorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
