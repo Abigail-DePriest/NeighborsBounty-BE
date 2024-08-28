@@ -47,3 +47,4 @@ class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Role
         fields = ('id', 'roleName')
+        depth = 2

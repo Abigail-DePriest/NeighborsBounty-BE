@@ -45,3 +45,4 @@ class EventTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventType
         fields = ('id', 'eventTypeName')
+        depth= 2
