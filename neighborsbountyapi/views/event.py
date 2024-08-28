@@ -48,9 +48,13 @@ class EventView(ViewSet):
         event.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
           
-          
-class EventSerializer(serializers.ModelSerializer):
-    eventType = serializers.PrimaryKeyRelatedField(queryset=EventType.objects.all())
+class EventTypeSerializer(serializers.ModelSerializer):
     class Meta:
+        model = EventType
+        fields = ('id', 'eventTypeName')  
+        depth = 2    
+class EventSerializer(serializers.ModelSerializer):
+   class Meta:
         model = Event
         fields = ('id', 'eventDate', 'eventType', 'location', 'eventTime')
+        depth = 2

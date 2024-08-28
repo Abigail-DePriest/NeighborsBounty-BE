@@ -18,20 +18,19 @@ class SignUpView(ViewSet):
           
     def create(self, request):
         
-        event_id = request.data['event_id']
-        event_id = Event.objects.get(pk=event_id)
-        member_id = request.data['member_id']
-        member_id = Member.objects.get(pk=member_id)
-        role_id = request.data['role_id']
-        role_id = Role.objects.get(pk=role_id)
+        event_id = request.data['event']
+        role_id = request.data['role']
+        member_id = request.data['member']
+        
+        member = Member.objects.get(pk=member_id)
+        event = Event.objects.get(pk=event_id)
+       
+        role = Role.objects.get(pk=role_id)
         
         signup = SignUp.objects.create(
-            member_id=request.data['member_id'],
-            event_id=request.data['event_id'],
-            role_id=request.data['role_id'],
-            member=member_id,
-            event=event_id,
-            role=role_id
+            member=member,
+            event=event,
+            role=role
             
             
         )
@@ -72,7 +71,24 @@ class SignUpView(ViewSet):
         signup = SignUp.objects.get(pk=pk)
         signup.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
+    
+class EventSerializer(serializers.ModelSerializer):
+   class Meta:
+        model = Event
+        fields = ('id', 'eventDate', 'eventType', 'location', 'eventTime')
+        depth = 2
+class RoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Role
+        fields = ('id', 'roleName')
+        depth = 2
+class MemberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Member
+        fields = ('id', 'uid', 'name')
+        depth = 2
 class SignUpSerializer(serializers.ModelSerializer):
     class Meta:
         model = SignUp
-        fields = ('id', 'member_id', 'event_id', 'role_id')
+        fields = ('id', 'member', 'event', 'role')
+        depth = 2
