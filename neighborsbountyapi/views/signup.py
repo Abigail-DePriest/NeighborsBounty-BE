@@ -7,10 +7,14 @@ from neighborsbountyapi.models import SignUp, Member, Event, Role
 class SignUpView(ViewSet):
     
     def retrieve (self, request, pk):
+        try:
             signup = SignUp.objects.get(pk=pk)
             serializer = SignUpSerializer(signup)
             return Response(serializer.data, status=status.HTTP_200_OK)
-          
+        
+        except SignUp.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        
     def list(self, request):
         signups = SignUp.objects.all()
         serializer = SignUpSerializer(signups, many=True)
@@ -24,7 +28,6 @@ class SignUpView(ViewSet):
         
         member = Member.objects.get(pk=member_id)
         event = Event.objects.get(pk=event_id)
-       
         role = Role.objects.get(pk=role_id)
         
         signup = SignUp.objects.create(
@@ -38,9 +41,9 @@ class SignUpView(ViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
     def update(self, request, pk):
-        member_id = request.data['member_id']
-        event_id = request.data['event_id']
-        role_id = request.data['role_id']
+        member_id = request.data['member']
+        event_id = request.data['event']
+        role_id = request.data['role']
         
         try:
             member = Member.objects.get(pk=member_id)

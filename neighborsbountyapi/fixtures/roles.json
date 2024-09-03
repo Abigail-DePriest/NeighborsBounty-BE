@@ -5,5 +5,12 @@
   "fields": {
       "roleName": "Chef"
   }
-}
+},
+{
+  "model": "neighborsbountyapi.role",
+  "pk": 2,
+  "fields": {
+    "roleName": "Sous Chef"
+  }
+ }
 ]
