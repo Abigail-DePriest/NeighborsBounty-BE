@@ -7,10 +7,15 @@ from neighborsbountyapi.models import EventType
 class EventTypeView(ViewSet):
     
     def retrieve (self, request, pk):
+        try:
             eventtype = EventType.objects.get(pk=pk)
-            serializer = EventTypeSerializer(eventtype)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-          
+        except EventType.DoesNotExist:
+            return Response({"detail": "EventType not found"}, status=status.HTTP_404_NOT_FOUND)
+           
+            
+        serializer = EventTypeSerializer(eventtype)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+           
     def list(self, request):
         eventtypes = EventType.objects.all()
         serializer = EventTypeSerializer(eventtypes, many=True)

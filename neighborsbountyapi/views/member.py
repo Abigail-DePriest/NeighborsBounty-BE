@@ -2,16 +2,21 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
+from rest_framework.exceptions import NotFound
 from neighborsbountyapi.models import Member
 
 
 class MemberView(ViewSet):
 
     def retrieve(self, request, pk):
-        member = Member.objects.get(pk=pk)
+        try:
+            member = Member.objects.get(pk=pk)
+        except Member.DoesNotExist:
+            raise NotFound("Member not found.")
+        
         serializer = MemberSerializer(member)
         return Response(serializer.data)
-
+    
     def list(self, request):
         members = Member.objects.all()
         serializer = MemberSerializer(members, many=True)
@@ -21,6 +26,8 @@ class MemberView(ViewSet):
        
         
         member = Member.objects.create(
+            
+            uid=request.data['uid'],
             name=request.data['name']
         )
         

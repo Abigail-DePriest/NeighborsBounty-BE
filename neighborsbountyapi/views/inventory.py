@@ -7,9 +7,9 @@ from neighborsbountyapi.models import Inventory, Event
 class InventoryView(ViewSet):
     
     def retrieve (self, request, pk):
-            inventory = Inventory.objects.get(pk=pk)
-            serializer = InventorySerializer(inventory)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+        inventory = Inventory.objects.get(pk=pk)
+        serializer = InventorySerializer(inventory)
+        return Response(serializer.data, status=status.HTTP_200_OK)
           
     def list(self, request):
         inventories = Inventory.objects.all()
