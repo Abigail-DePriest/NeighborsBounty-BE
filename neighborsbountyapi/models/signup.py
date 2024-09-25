@@ -1,16 +1,16 @@
 from django.db import models
 from .event import Event
-from .member import Member
-from .role import Role
+from .user import User
+
 
 class SignUp(models.Model):
-    member = models.ForeignKey(Member, on_delete=models.CASCADE) 
+    user = models.ForeignKey(User, on_delete=models.CASCADE) 
     event = models.ForeignKey(Event, on_delete=models.CASCADE) 
-    role = models.ForeignKey(Role, on_delete=models.CASCADE, null=True, blank=True)
+    
 
 
 class Meta:
-        unique_together = ('member', 'event') 
+        unique_together = ('user', 'event') 
 
 def __str__(self):
-        return f"{self.member.name} signed up for {self.event} as {self.role}"
+        return f"{self.user.name} signed up for {self.event}"

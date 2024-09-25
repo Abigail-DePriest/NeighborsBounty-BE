@@ -1,6 +1,7 @@
 from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
+from rest_framework.decorators import action
 from rest_framework import serializers, status
 from neighborsbountyapi.models import Event, EventType
 
@@ -26,12 +27,14 @@ class EventView(ViewSet):
              eventType = EventType.objects.get(pk=eventType_id)
         except:
             return Response({'error': 'EventType not found'}, status=status.HTTP_400_BAD_REQUEST)
+       
+            
             
         event = Event.objects.create(
             eventDate=request.data['eventDate'],
             location=request.data['location'],
             eventTime=request.data['eventTime'],
-            eventType=eventType
+            eventType=eventType,
         )
         serializer = EventSerializer(event)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -40,15 +43,18 @@ class EventView(ViewSet):
 
         eventType_id = request.data['eventType']
         eventType = EventType.objects.get(pk=eventType_id)
+        
         event = Event.objects.get(pk=pk)
         event.eventDate = request.data['eventDate']
         event.location = request.data['location']
         event.eventTime = request.data['eventTime']
         event.eventType = eventType
+        
         event.save()
 
         serializer = EventSerializer(event)
         return Response(serializer.data, status=status.HTTP_200_OK)
+   
     
     def destroy(self, request, pk):
         event = Event.objects.get(pk=pk)
@@ -65,7 +71,7 @@ class EventSerializer(serializers.ModelSerializer):
     eventTime = serializers.TimeField(format='%H:%M')
     class Meta:
         model = Event
-        fields = ('id', 'eventDate', 'eventType', 'location', 'eventTime')
-        depth = 2
+        fields = ('id', 'eventDate', 'eventType',  'location', 'eventTime')
+        depth = 3
         
    

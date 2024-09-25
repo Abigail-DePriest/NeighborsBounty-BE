@@ -48,7 +48,7 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
     'http://127.0.0.1:3000'
 )
-
+CORS_ALLOW_ALL_ORIGINS = True
 # UPDATE THIS
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -62,6 +62,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'neighborsbounty.urls'
+
 
 TEMPLATES = [
     {

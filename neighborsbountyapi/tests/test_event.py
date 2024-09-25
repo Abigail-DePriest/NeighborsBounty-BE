@@ -5,12 +5,12 @@ from neighborsbountyapi.models import Event, EventType
 from neighborsbountyapi.views.event import EventSerializer, EventTypeSerializer
 
 class EventTests(APITestCase):
-    # Load fixtures to set up initial data
+   
     fixtures = ['events', 'eventtypes']
 
     def setUp(self):
-        # Set up any initial data needed for the tests
-        ##self.event = Event.objects.first()  # Fetch an existing event for testing
+        
+        ##self.event = Event.objects.first() 
         self.eventType = EventType.objects.create(eventTypeName="Gleaning")
         # Create an initial Event if needed
         self.event = Event.objects.create(
@@ -38,7 +38,7 @@ class EventTests(APITestCase):
         print(f"Create Event Response: {response.content}")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-        # Verify the newly created event
+       
         new_event = Event.objects.last()
         expected = EventSerializer(new_event).data
         self.assertEqual(expected, response.data)
@@ -81,13 +81,13 @@ class EventTests(APITestCase):
         updated_event_time_str = updated_data['eventTime']
         updated_event_time = datetime.strptime(updated_event_time_str, '%H:%M').time()
         
-        # Compare the eventDate
+       
         self.assertEqual(self.event.eventDate.strftime('%Y-%m-%d'), updated_data['eventDate'])
         
-        # Compare the location
+       
         self.assertEqual(self.event.location, updated_data['location'])
         
-        # Compare the eventTime
+        
         self.assertEqual(self.event.eventTime, updated_event_time)
 
     def test_delete_event(self):
