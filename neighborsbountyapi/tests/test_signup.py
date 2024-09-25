@@ -1,20 +1,21 @@
 from rest_framework import status
 from rest_framework.test import APITestCase
-from neighborsbountyapi.models import SignUp, Member, Event, Role
+from neighborsbountyapi.models import SignUp, Member, Event, Role, EventType
 from neighborsbountyapi.views.signup import SignUpSerializer
 
 class SignUpTests(APITestCase):
 
-    # Add any fixtures you want to run to build the test database
-    fixtures = ['events', 'members', 'roles', 'signups']
+   
+    fixtures = ['events','eventtypes','members', 'roles', 'signups']
 
     def setUp(self):
-        # Create initial objects for tests
-        self.member = Member.objects.first()
-        self.event = Event.objects.first()
-        self.role = Role.objects.first()
         
-        # Create an initial SignUp object
+        self.eventType=EventType.objects.get(pk=1)
+        self.member = Member.objects.get(pk=1)
+        self.event = Event.objects.get(pk=1)
+        self.role = Role.objects.get(pk=1)
+        
+        
         self.signup = SignUp.objects.create(
             member=self.member,
             event=self.event,

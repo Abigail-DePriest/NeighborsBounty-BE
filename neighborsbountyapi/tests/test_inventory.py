@@ -5,7 +5,7 @@ from neighborsbountyapi.views.inventory import InventorySerializer
 
 class InventoryTests(APITestCase):
     
-    # Add any fixtures you want to run to build the test database
+   
     fixtures = ['inventory', 'events', 'eventtypes']
 
     def setUp(self):
@@ -78,7 +78,7 @@ class InventoryTests(APITestCase):
         self.assertEqual(updated_inventory.quantity, data['quantity'])
 
     def test_delete_inventory(self):
-        # Define the URL to delete the inventory item
+        
         url = f"/inventories/{self.inventory.id}"
         response = self.client.delete(url)
 

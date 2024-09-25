@@ -18,18 +18,22 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
-from neighborsbountyapi.views import EventView, EventTypeView, MemberView, InventoryView, RoleView, SignUpView
+from neighborsbountyapi.views import register_user, check_user
+from neighborsbountyapi.views import EventView, EventTypeView, UserView,InventoryView, RoleView, SignUpView
 
 
 router = routers.DefaultRouter(trailing_slash=False)
 
 router.register(r'events', EventView, 'event')
 router.register(r'eventtypes', EventTypeView, 'eventtype')
-router.register(r'members', MemberView, 'member')
+router.register(r'users', UserView, 'user')
 router.register(r'inventories', InventoryView, 'inventory')
 router.register(r'roles', RoleView, 'role')
 router.register(r'signups', SignUpView, 'signup')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
+    path('register', register_user),
+    path('checkuser', check_user),
+ 
 ]

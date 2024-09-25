@@ -1,5 +1,6 @@
 from django.db import models
 from .eventtype import EventType
+from .inventory import Inventory
 
 
 
